@@ -55,3 +55,9 @@
 
 ### silver 2
 1. 1874
+
+
+## baekjun_python
+### silver 2
+1. 1260
+
