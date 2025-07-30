@@ -71,3 +71,8 @@
 ### silver 2
 1. 1260
 
+
+## baekjun_javascript
+### silver 5
+1. 2839
+
