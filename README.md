@@ -76,6 +76,8 @@
 
 
 ## baekjun_javascript
+### bronze 1
+1. 28702
 ### silver 5
 1. 2839
 
