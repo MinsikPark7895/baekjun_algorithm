@@ -61,6 +61,7 @@
 1. 11866
 2. 10845
 3. 11047
+4. 9012
 ### silver 3
 1. 15650
 2. 9095
@@ -74,6 +75,7 @@
 ## baekjun_python
 ### silver 2
 1. 1260
+2. 1927
 
 
 ## baekjun_javascript
