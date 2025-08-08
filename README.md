@@ -73,9 +73,12 @@
 
 
 ## baekjun_python
+### silver 3
+1. 15654
 ### silver 2
 1. 1260
 2. 1927
+
 
 
 ## baekjun_javascript
