@@ -75,6 +75,7 @@
 ## baekjun_python
 ### silver 3
 1. 15654
+2. 9375
 ### silver 2
 1. 1260
 2. 1927
