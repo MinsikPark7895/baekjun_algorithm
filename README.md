@@ -71,6 +71,9 @@
 ### gold5
 1. 7576
 
+### gold4
+1. 9663
+
 
 ## baekjun_python
 ### silver 5
