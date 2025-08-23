@@ -73,6 +73,7 @@
 
 ### gold4
 1. 9663
+2. 1967
 
 
 ## baekjun_python
