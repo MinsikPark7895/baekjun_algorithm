@@ -180,6 +180,7 @@
 ### gold3
 
 1. 1238
+2. 1520
 
 ## baekjun_javascript
 
