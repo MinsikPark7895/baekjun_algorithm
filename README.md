@@ -120,6 +120,9 @@
 1. 1238
 2. 1520
 3. 1600
+### gold2
+1. 1202
+2. 1167
 
 ## baekjun_javascript
 ### bronze 1
