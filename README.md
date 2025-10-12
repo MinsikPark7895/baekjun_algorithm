@@ -127,6 +127,7 @@
 ### gold1
 1. 1016
 2. 1275
+3. 1561
 
 ## baekjun_javascript
 ### bronze 1
