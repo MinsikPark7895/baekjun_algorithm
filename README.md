@@ -128,6 +128,7 @@
 1. 1016
 2. 1275
 3. 1561
+4. 1300
 
 ## baekjun_javascript
 ### bronze 1
