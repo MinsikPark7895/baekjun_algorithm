@@ -2,8 +2,6 @@
 #include <vector>
 #include <algorithm>
 
-
-
 using namespace std;
 
 vector<vector<int>> tree;  // 나중에 바꿀 함수

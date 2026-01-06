@@ -21,27 +21,32 @@ void merge(vector<int>& arr, int start, int mid, int end) {
         else {
             sorted[k] = arr[j];
             j++;
-            inv += (mid - i + 1);
+            inv += (mid - i + 1); // 왼쪽에 남아있는 모든 값들이 arr[j]보다 큼
         }
         k++;
     }
 
-    int entry;
-    int target;
+    int entry;  // 남아있는 구간의 시작 인덱스
+    int target;  // 남아있는 구간의 끝 인덱스
+
+    // 왼쪽이 끝난 경우
     if(i > mid) {
         entry = j;
         target = end;
     }
+    // 오른쪽이 끝난 경우
     else {
         entry = i;
         target = mid;
     }
 
+    // 남은 원소 복사
     for (int t = entry; t <= target; t++) {
         sorted[k] = arr[t];
         k++;
     }
 
+    // 원본 배열에 반영
     for (int t = start; t <= end; t++) {
         arr[t] = sorted[t];
     }
