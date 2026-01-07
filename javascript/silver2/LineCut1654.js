@@ -14,6 +14,21 @@ let max_length = Math.floor(total_length / N)
 
 let current_num = 0
 
+function two_pointer(start, end ,target) {
+    
+    flag = true
+    
+    while (flag) {
+        cur_start = start
+        cur_end = end
+        mid = Math.floor((cur_start + cur_end) / 2)
+
+        
+
+        flag = false
+    }
+}
+
 while (current_num !== N){   
     current_num = 0
     for (let i = 0; i < K; i++){
