@@ -15,11 +15,13 @@ int main(void){
 
     int end_x, end_y; // 도착 위치
 
-    string result = "sad"; // 결과값
+    string result; // 결과값
 
     cin >> test_case;
 
     for (int i = 0; i < test_case; i++) {
+        result = "sad";
+
         cin >> cons;  // 편의점 수 받기
         cin >> start_x >> start_y;  // 시작점 받기
 
@@ -41,15 +43,15 @@ int main(void){
 
         q.push({start_x, start_y});
 
-        // 
+        // bfs 시작
         while(!q.empty()) {
             auto cur = q.front();
             q.pop();
             int x = cur.first;
             int y = cur.second;
 
+            // 
             if(abs(x - end_x) + abs(y - end_y) <= 1000) {
-                cout << "<<" << result << ',' << x << ',' << y << ">>";
                 result = "happy";
                 break;
             }
@@ -59,7 +61,6 @@ int main(void){
                 int next_x = next.first;
                 int next_y = next.second;
                 if (!visited[i] && (abs(x - next_x) + abs(y - next_y) <= 1000)) {
-                    cout << '('<< result << ','<< next_x << ',' << next_y << ')';
                     q.push({next_x, next_y});
                     visited[i] = true;
                 }
