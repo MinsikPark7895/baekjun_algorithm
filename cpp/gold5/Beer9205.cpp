@@ -8,18 +8,19 @@ using namespace std;
 int main(void){
     int test_case; // 테스트 케이스
 
-    int cons; // 편의점 수
-    int start_x, start_y; // 시작 위치
-
-    vector<pair<int, int>> con; // 편의점 배열
-
-    int end_x, end_y; // 도착 위치
-
-    string result; // 결과값
-
+    
     cin >> test_case;
-
+    
     for (int i = 0; i < test_case; i++) {
+        int cons; // 편의점 수
+        int start_x, start_y; // 시작 위치
+    
+        vector<pair<int, int>> con; // 편의점 배열
+        con.reserve(cons);
+    
+        int end_x, end_y; // 도착 위치
+    
+        string result; // 결과값
         result = "sad";
 
         cin >> cons;  // 편의점 수 받기
