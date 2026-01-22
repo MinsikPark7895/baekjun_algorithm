@@ -7,8 +7,13 @@ using namespace std;
 int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, 1, 0, -1};
 
-int bfs(int start_row, int start_col) {
+vector<string> board;
+vector<vector<int>> visited;
+
+int bfs(int start_row, int start_col, int N, int M) {
     queue<pair<int, int>> q;
+
+    visited.resize(N, vector<int>(M, 0));
 
     q.push({start_row, start_col});
 
@@ -21,8 +26,8 @@ int bfs(int start_row, int start_col) {
         for(int i = 0; i < 4; i++) {
             int nxt_row = row_now + dy[i];
             int nxt_col = col_now + dx[i];
-            if (nxt_row >= 0 && nxt_col>=0) {
-                // 조건 다시 설정
+            if (nxt_row >= 0 && nxt_row < N && nxt_col>=0 && nxt_col < M) {
+                // 조건 다시 보기
             }
         }
     }
@@ -36,8 +41,7 @@ int main(void) {
     int N, M;
     cin >> N >> M;
 
-    vector<string> board(N);
-    vector<vector<int>> visited(N, vector<int>(M, 0));
+    board.resize(N);
     vector<pair<int, int>> start;
 
     for (int i = 0; i < N; i++) {
@@ -69,8 +73,10 @@ int main(void) {
 
     for (int i = 0; i < start.size(); i++) {
         auto cur = start[i];
+        int cur_row = cur.first;
+        int cur_col = cur.second;
 
-        int len = bfs();
+        int len = bfs(cur_row, cur_col, N, M);
 
     }
 
