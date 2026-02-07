@@ -1,57 +1,62 @@
 #include <iostream>
-#include <map>
-#include <limits>
-#include <math.h>
+#include <queue>
 
 using namespace std;
 
 int main(void) {
-    int inf = numeric_limits<int>::max();
-    int dp[100] = {inf, };
 
     int N, M;
     cin >> N >> M;
 
-    map<int, int> dict_ladder;
-    map<int, int> dict_snake;
+    int ladder[101] = {0, };
+    int snake[101] = {0, };
 
-    int a, b;
     for (int i = 0; i < N; i++) {
-        cin >> a >> b;
-        dict_ladder[a] = b;
+        int x, y;
+        cin >> x >> y;
+        ladder[x] = y;
     }
 
     for(int i = 0; i < M; i++) {
-        cin >> a >> b;
-        dict_snake[a] = b;
+        int u, v;
+        cin >> u >> v;
+        snake[u] = v;
     }
 
-    for (int i = 0; i < N; i++){
-        if (dict_snake.find(i) != dict_snake.end()){
-            continue;
-        }
-        else if (i < 6) {
-            dp[i] = 1;
-        }
-        else {
-            for (int j = 0; j < 6; j++) {
-                if (dict_snake.find(i) != dict_snake.end()){
-                    continue;
-                }                
-                dp[i] = min(dp[i - j - 1] + 1, dp[i]);
-            }
-        }
-        // C++20이상은 contains() 사용
-        if (dict_ladder.find(i) != dict_ladder.end()) {
-            if (dict_snake.find(i) != dict_snake.end()){
-                continue;
-            }
-            dp[dict_ladder[i]] = dp[i];
-        }
+    int arr[101];
+    for(int i=0; i<=100; i++) arr[i] = -1;
 
+    queue<int> q;
+    q.push(1);
+    arr[1] = 0;
+
+    while (!q.empty()) {
+        int cur_num = q.front();
+        q.pop();
+
+        for(int i = 1; i <= 6; i++){
+            int next_num = cur_num + i;
+
+            // 100번 칸을 넘어가면 무시
+            if (next_num > 100) continue;
+
+            // 이동한 칸에 사다리나 뱀이 있는지 확인
+            if (ladder[next_num] != 0) {
+                next_num = ladder[next_num];
+            }
+            else if (snake[next_num] != 0) {
+                next_num = snake[next_num];
+            }
+
+            // 아직 방문하지 않은 곳이라면 거리 갱신
+            if (arr[next_num] == -1) {
+                arr[next_num] = arr[cur_num] + 1;
+                q.push(next_num);
+            }
+        }
     }
 
-    cout << dp[99];
+    cout << arr[100];
 
     return 0;
 }
