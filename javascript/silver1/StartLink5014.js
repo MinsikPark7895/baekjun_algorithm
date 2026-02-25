@@ -34,7 +34,7 @@ while (head < queue.length) {
 
     // 아래로 가는 경우
     const nextDown = cur - D
-    if (nextUp >= 1 && !visited[nextDown]) {
+    if (nextDown >= 1 && !visited[nextDown]) {
         visited[nextDown] = true
         queue.push([nextDown, cnt + 1])
     }
