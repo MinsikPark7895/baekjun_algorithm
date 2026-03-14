@@ -32,12 +32,22 @@ int main(void) {
             }
             else if (i >= 1 && (str[i - 1] == ')' || str[i - 1] == ']')) {
                 // num 스택에서 2개를 빼서 더하고 2를 곱한 후 다시 넣기
-                int a = num.top();
-                num.pop();
-                int b = num.top();
-                num.pop();
-                num.push(2 * (a + b));
-                st.pop();
+                if (num.size() >= 2) {
+                    int a = num.top(); 
+                    num.pop();
+                    int b = num.top(); 
+                    num.pop();
+                    num.push(2 * (a + b));
+                } else if (num.size() == 1) {
+                    int a = num.top(); 
+                    num.pop();
+                    num.push(2 * a);
+                }
+                
+                if (!st.empty()) {
+                    st.pop();
+                    
+                }
             }
             else if (i >= 1 && str[i - 1] == '['){
                 num.push(0); // 짝이 맞지 않는 실패 케이스
@@ -56,12 +66,21 @@ int main(void) {
             }
             else if (i >= 1 && (str[i - 1] == ']' || str[i - 1] == ')')) {
                 // num 스택에서 2개를 빼서 더하고 3을 곱한 후 다시 넣기
-                int a = num.top();
-                num.pop();
-                int b = num.top();
-                num.pop();
-                num.push(3 * (a + b));
-                st.pop();
+                if (num.size() >= 2) {
+                    int a = num.top(); 
+                    num.pop();
+                    int b = num.top(); 
+                    num.pop();
+                    num.push(3 * (a + b));
+                } else if (num.size() == 1) {
+                    int a = num.top(); 
+                    num.pop();
+                    num.push(3 * a);
+                }
+                
+                if (!st.empty()) {
+                    st.pop();
+                }
             }
             else if (i >= 1 && str[i - 1] == '('){
                 num.push(0); // 짝이 맞지 않는 실패 케이스
