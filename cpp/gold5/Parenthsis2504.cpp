@@ -1,6 +1,5 @@
 #include <iostream>
 #include <stack>
-#include <vector>
 #include <string>
 
 using namespace std;
@@ -9,90 +8,48 @@ int main(void) {
     string str;
     cin >> str;
     
-    stack<string> st;
-    stack<int> num;
+    stack<char> st;
+    int result = 0;
+    int temp = 1;   // 곱셈을 누적할 변수
     
     for (int i = 0; i < str.size(); i++) {
-        // 여는 괄호일 때
         if (str[i] == '(') {
-            st.push(string(1, str[i]));
+            temp *= 2;      // 분배 법칙을 위해 2를 곱함
+            st.push('(');
         }
         else if (str[i] == '[') {
-            st.push(string(1, str[i]));
+            temp *= 3;      // 분배 법칙을 위해 3을 곱함
+            st.push('[');
         }
-        // 닫는 소괄호일 때 ')'
         else if (str[i] == ')') {
-            if (st.empty()) {
-                num.push(0); 
+            if (st.empty() || st.top() != '(') {
+                result = 0; // 짝이 안 맞는 경우
                 break;
             }
-            if (i >= 1 && str[i - 1] == '(') {
-                num.push(2);
-                st.pop();
+            if (str[i - 1] == '(') {
+                result += temp; 
             }
-            else if (i >= 1 && (str[i - 1] == ')' || str[i - 1] == ']')) {
-                // num 스택에서 2개를 빼서 더하고 2를 곱한 후 다시 넣기
-                if (num.size() >= 2) {
-                    int a = num.top(); 
-                    num.pop();
-                    int b = num.top(); 
-                    num.pop();
-                    num.push(2 * (a + b));
-                } else if (num.size() == 1) {
-                    int a = num.top(); 
-                    num.pop();
-                    num.push(2 * a);
-                }
-                
-                if (!st.empty()) {
-                    st.pop();
-                    
-                }
-            }
-            else if (i >= 1 && str[i - 1] == '['){
-                num.push(0); // 짝이 맞지 않는 실패 케이스
-                break;
-            }
+            st.pop();
+            temp /= 2;      // 곱했던 2를 다시 나눔
         }
-        // 닫는 대괄호일 때 ']' (새로 구현된 부분)
         else if (str[i] == ']') {
-            if (st.empty()) {
-                num.push(0);
+            if (st.empty() || st.top() != '[') {
+                result = 0; // 짝이 안 맞는 경우
                 break;
             }
-            if (i >= 1 && str[i - 1] == '[') {
-                num.push(3);
-                st.pop();
+            if (str[i - 1] == '[') {
+                result += temp;
             }
-            else if (i >= 1 && (str[i - 1] == ']' || str[i - 1] == ')')) {
-                // num 스택에서 2개를 빼서 더하고 3을 곱한 후 다시 넣기
-                if (num.size() >= 2) {
-                    int a = num.top(); 
-                    num.pop();
-                    int b = num.top(); 
-                    num.pop();
-                    num.push(3 * (a + b));
-                } else if (num.size() == 1) {
-                    int a = num.top(); 
-                    num.pop();
-                    num.push(3 * a);
-                }
-                
-                if (!st.empty()) {
-                    st.pop();
-                }
-            }
-            else if (i >= 1 && str[i - 1] == '('){
-                num.push(0); // 짝이 맞지 않는 실패 케이스
-                break;
-            }
+            st.pop();
+            temp /= 3;      // 곱했던 3을 다시 나눔
         }
     }
     
-    if (num.empty()) {
+    // 예외 처리
+    if (!st.empty()) {
         cout << 0 << "\n";
     } else {
-        cout << num.top() << "\n";
+        cout << result << "\n";
     }
     
     return 0;
