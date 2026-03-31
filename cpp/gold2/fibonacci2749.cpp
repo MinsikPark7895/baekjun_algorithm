@@ -3,8 +3,10 @@
 
 using namespace std;
 
+// 순환 큐
 vector<int> arr(10, -1);
 
+// 피사노의 주기 사용
 int fibonnaci(int idx) {
     if (idx == 0) {
         arr[0] = 0;
@@ -16,12 +18,15 @@ int fibonnaci(int idx) {
     }
     else if (idx >= 2) {
         if (arr[idx % 10] < arr[(idx - 1) % 10]) {
-            arr[idx] = (fibonnaci(idx - 1) + fibonnaci(idx - 2)) % 1000000;
+            arr[idx % 10] = (fibonnaci(idx - 1) + fibonnaci(idx - 2)) % 1000000;
             
         }
         return arr[idx];
         
     }
+
+    // 모든 조건문을 빠져나올 경우
+    return 0;
     
 }
 
@@ -34,11 +39,7 @@ int main(void) {
     arr[1] = 1;
     
     cout << fibonnaci(N);
-    
-    // for (int i = 0; i < 10; i++) {
-    //     cout << arr[i] << " ";
-    // }
-    
+       
 
     
     return 0;
