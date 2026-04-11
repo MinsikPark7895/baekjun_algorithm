@@ -2,26 +2,44 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* postfix(int n, char* buffer, int index, int* sign, char* parentheses) {
-	if (index >= n) {
-		buffer[index] = '\0';
-		return buffer;
+void postfix(char* str, int index, char* stack, int* top) {
+	// 종료 조건 : 문자열의 끝 또는 getline이 포함시킨 '\n'일 경우
+	if (str[index] == '\n' || str[index] == '\0') {
+		while (*top >= 0) {
+		    printf("%c", stack[(*top)--]);
+		}
+		return ;
 	}
 
+    char c = str[index];
 	
-	if (buffer[index] == '+' || buffer[index] == '-' || buffer[index] == '*' || buffer[index] == '/') {
-			
+	if (c >= 'A' && c <= 'Z') {
+		printf("%c", c);
 	}
-	else if (buffer[index] == '(') {
-
+	else if (c == '(') {
+        stack[++(*top)] = c;
 	}
-	else if (buffer[index] == ')') {
-
+	else if (c == '*' || c == '/') {
+        while (*top >= 0 && (stack[*top] == '*' || stack[*top] == '/')){
+            printf("%c", stack[(*top)--]);
+        }
+        stack[++(*top)] = c;
 	}
-	else {
-
+	else if (c == '+' || c == '-') {
+        while (*top >= 0 && stack[*top] != '(') {
+            printf("%c", stack[(*top)--]);
+        }
+        stack[++(*top)] = c;
 	}
-	postfix(n, buffer, index + 1, sign, parentheses);
+	else if (c == ')') {
+	    while(*top >= 0 && stack[*top] != '(') {
+	        printf("%c", stack[(*top)--]);
+	    }
+	    if (*top >= 0) {
+	        (*top)--;
+	    }
+	}
+	postfix(str, index + 1, stack, top);
 	
 
 }
@@ -31,21 +49,27 @@ int main(void) {
 	char* str = NULL;
 	size_t size = 0;
 
-	getline(&str, &size, stdin);
+	if (getline(&str, &size, stdin) == -1) {
+	    free(str);
+	    return 0;
+	};
 
 	// 괄호를 담을 스택 
-	char* stack = NULL;
-	int* stack_idx = NULL;
+	int len = strlen(str);
+	char* stack = (char*)malloc(len * sizeof(char));
 
-	char* sign;  // 연산 기호들을 담을 배열
-	char* letter;  // 문자를 담을 배열
+	if (stack == NULL) {
+	    free(str);
+	    return 1;
+	}
 
-	
-	char* result;
+    int top = -1;
 
-	result = postfix(size, stack, 0, stack_idx, stack);
+	postfix(str, 0, stack, &top);
+	printf("\n");
 
 
+    free(stack);
 	free(str);
 
 
